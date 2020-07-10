@@ -9,7 +9,7 @@ public class Grid2
     private int height;
     private float cellSize;
     private int[,] gridArray;
-    private Vector3 originPosition;
+    private TextMesh[,] debugTextArray;
 
     public const int sortingOrderDefault = 5000;
 
@@ -21,11 +21,13 @@ public class Grid2
 
         gridArray = new int[width, height];
 
+        debugTextArray = new TextMesh[width, height];
+
         for (int w = 0; w < this.gridArray.GetLength(0); w++)
         {
             for (int h = 0; h < this.gridArray.GetLength(1); h++)
             {
-                //this.CreateWorldText(gridArray[w, h].ToString(), null, GetWorldPosition(w, h) + new Vector3(cellSize, cellSize) * 0.5f, 20, Color.white, TextAnchor.MiddleCenter);
+                debugTextArray[w, h] = this.CreateWorldText(gridArray[w, h].ToString(), null, GetWorldPositionIsometric(w, h) + new Vector3(0, cellSize / 2), 20, Color.white, TextAnchor.MiddleCenter);
                 Debug.DrawLine(GetWorldPositionIsometric(w, h), GetWorldPositionIsometric(w, h + 1), Color.white, 100f);
                 Debug.DrawLine(GetWorldPositionIsometric(w, h), GetWorldPositionIsometric(w + 1, h), Color.white, 100f);
             }
@@ -33,11 +35,24 @@ public class Grid2
 
         Debug.DrawLine(GetWorldPositionIsometric(0, height), GetWorldPositionIsometric(width, height), Color.white, 100f);
         Debug.DrawLine(GetWorldPositionIsometric(width, 0), GetWorldPositionIsometric(width, height), Color.white, 100f);
+
+        SetValue(0, 0, 10);
+        SetValue(0, 1, 11);
+        SetValue(1, 0, 12);
     }
 
     public void SetValue(int x, int y, int value)
     {
-        gridArray[x, y] = value;
+        if (x >= 0 && y >= 0)
+        {
+            gridArray[x, y] = value;
+            debugTextArray[x, y].text = gridArray[x, y].ToString();
+        }
+    }
+
+    public void SetValue(Vector3 worldPosition, int value)
+    {
+
     }
 
     private Vector3 GetWorldPosition(float x, float y)
