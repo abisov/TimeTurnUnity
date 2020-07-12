@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 
 public class Grid2
@@ -52,7 +53,25 @@ public class Grid2
 
     public void SetValue(Vector3 worldPosition, int value)
     {
+        int x, y;
+        this.GetXYIsometric(worldPosition, out x, out y);
+        SetValue(x, y, value);
+    }
 
+    private void GetXYIsometric(Vector3 worldPosition, out int x, out int y)
+    {
+        Vector2 vec2 = Make2D(worldPosition.x, worldPosition.y);
+
+        x = Mathf.FloorToInt(vec2.x / cellSize);
+        y = Mathf.FloorToInt(vec2.y / cellSize);
+    }
+
+    private Vector2 Make2D(float x, float y)
+    {
+        return new Vector2(
+          (2 * y + x) / 2,
+          (2 * y - x) / 2
+        );
     }
 
     private Vector3 GetWorldPosition(float x, float y)
