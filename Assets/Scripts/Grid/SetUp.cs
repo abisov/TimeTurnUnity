@@ -19,6 +19,11 @@ public class SetUp : MonoBehaviour
         {
             this.grid2.SetValue(this.GetMouseWorldPosition(), 20);
         }
+        if (Input.GetMouseButtonDown(1))
+        {
+            Debug.Log(
+               this.grid2.GetValue(this.GetMouseWorldPosition()));
+        }
     }
 
     private Vector3 GetMouseWorldPosition()

@@ -58,6 +58,25 @@ public class Grid2
         SetValue(x, y, value);
     }
 
+    public int GetValue(int x, int y)
+    {
+        if (x >= 0 && y >= 0)
+        {
+            return gridArray[x, y];
+        } 
+        else
+        {
+            return 0;
+        }
+    }
+
+    public int GetValue(Vector3 worldPosition)
+    {
+        int x, y;
+        GetXYIsometric(worldPosition, out x, out y);
+        return GetValue(x, y);
+    }
+
     private void GetXYIsometric(Vector3 worldPosition, out int x, out int y)
     {
         Vector2 vec2 = Make2D(worldPosition.x, worldPosition.y);
