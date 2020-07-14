@@ -7,6 +7,8 @@ public class SetUp : MonoBehaviour
 {
     private Pathfinding pathfinding;
 
+    [SerializeField] private CharacterMovement characterPathfinding; 
+
     private void Start()
     {
         pathfinding = new Pathfinding(10, 10);
@@ -27,7 +29,6 @@ public class SetUp : MonoBehaviour
             {
                 for (int i = 0; i < path.Count - 1; i++)
                 {
-                    //Debug.DrawLine(new Vector3(path[i].x, path[i].y) * 10f + Vector3.one * 5f, new Vector3(path[i + 1].x, path[i + 1].y) * 10f + Vector3.one * 5f, Color.green, 5f);
                     Debug.DrawLine(path[i].GetWorldPosition(), path[i + 1].GetWorldPosition(), Color.green, 5f);
                 }
             }
@@ -42,24 +43,6 @@ public class SetUp : MonoBehaviour
          } */
     }
 
-    /* private void Start()
-     {
-         this.grid = new Grid(20, 20, 10f, new Vector3(0, 0));
-     }
-
-     private void Update()
-     {
-         if (Input.GetMouseButtonDown(0))
-         {
-             this.grid.SetValue(this.GetMouseWorldPosition(), 20);
-         }
-         if (Input.GetMouseButtonDown(1))
-         {
-             Debug.Log(
-                this.grid.GetValue(this.GetMouseWorldPosition()));
-         }
-     }
-    */
     private Vector3 GetMouseWorldPosition()
     {
         var vec = GetMouseWorldPositionWithZ(Input.mousePosition, Camera.main);
