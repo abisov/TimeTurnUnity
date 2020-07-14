@@ -12,6 +12,9 @@ public class CharacterMovement : MonoBehaviour
     private List<PathNode> pathNodeList = null;
     private int currentPathIndex;
 
+    private int currentX = 0;
+    private int currentY = 0;
+
     private void Update()
     {
         HandleMovement2();
@@ -88,7 +91,10 @@ public class CharacterMovement : MonoBehaviour
     {
         currentPathIndex = 0;
         Pathfinding.Instance.GetGrid().GetXYIsometric(targetPosition, out int x, out int y);
-        this.pathNodeList = Pathfinding.Instance.FindPath(0, 0, x, y);
+        this.pathNodeList = Pathfinding.Instance.FindPath(this.currentX, this.currentY, x, y);
+        this.currentX = x;
+        this.currentY = y;
+       
 
         if (this.pathNodeList != null && this.pathNodeList.Count > 1)
         {
