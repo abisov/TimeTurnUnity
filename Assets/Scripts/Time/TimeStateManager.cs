@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum TimeState { past, present, future}
+
 public class TimeStateManager : MonoBehaviour
 {
     TimeState timeState = TimeState.present;
